@@ -5,22 +5,18 @@ using namespace std;
 class Solution {
 public:
     int findMaxConsecutiveOnes(vector<int>& nums) {
-        int n=1;
-        
-        for(vector<int>::iterator it=nums.begin();it!=nums.end();it++)
-        {
-            if(*it==*(it++))
-            {
-                n++;
+        int Max=0,count=0;
+        for(vector<int>::iterator it=nums.begin();it!=nums.end();it++){
+            if(*it==1){
+                count++;
+                if(Max<count)   Max=count;
             }
-            else
-            {
-                n=1;
+            else{
+                count=0;
             }
         }
-        return n;
+        return Max;
     }
-    
 };
 
 int main()
