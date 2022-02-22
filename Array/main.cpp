@@ -6,7 +6,6 @@
 
 示例 2:
 输入：nums = [1,0,1,1,0,1]  输出：2
-?
 
 提示：
 1 <= nums.length <= 105
@@ -33,8 +32,7 @@ public:
     }
 };
 
-int main()
-{
+int main(){
     Solution v;
     vector<int> nums;
     nums.push_back(1);
