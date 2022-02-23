@@ -18,6 +18,10 @@ using namespace std;
 class Solution {
 public:
     int findMaxConsecutiveOnes(vector<int>& nums) {
+        /* 
+            Max：最大连续个数
+            count：连续个数
+         */
         int Max=0,count=0;
         for(vector<int>::iterator it=nums.begin();it!=nums.end();it++){
             if(*it==1){
