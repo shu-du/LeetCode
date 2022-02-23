@@ -1,52 +1,57 @@
 /* 
-485. 最大连续 1 的个数
-给定一个二进制数组 nums ， 计算其中最大连续 1 的个数。
+495. 提莫攻击
+一个 非递减 的整数数组 timeSeries ，其中 timeSeries[i] 表示提莫在 timeSeries[i] 秒时对艾希发起攻击，以及一个表示中毒持续时间的整数 duration 返回艾希处于中毒状态的 总 秒数。
 示例 1：
-输入：nums = [1,1,0,1,1,1]  输出：3
+输入：timeSeries = [1,4], duration = 2  输出：4
+解释：提莫攻击对艾希的影响如下：
+- 第 1 秒，提莫攻击艾希并使其立即中毒。中毒状态会维持 2 秒，即第 1 秒和第 2 秒。
+- 第 4 秒，提莫再次攻击艾希，艾希中毒状态又持续 2 秒，即第 4 秒和第 5 秒。
+艾希在第 1、2、4、5 秒处于中毒状态，所以总中毒秒数是 4 。
 
-示例 2:
-输入：nums = [1,0,1,1,0,1]  输出：2
-
-提示：
-1 <= nums.length <= 105
-nums[i]?不是 0 就是 1. */
+示例 2：
+输入：timeSeries = [1,2], duration = 2  输出：3
+*/
 
 #include <iostream>
 #include <vector>
 using namespace std;
-
+ 
 class Solution {
 public:
-    int findMaxConsecutiveOnes(vector<int>& nums) {
-        /* 
-            Max：最大连续个数
-            count：连续个数
-         */
-        int Max=0,count=0;
-        for(vector<int>::iterator it=nums.begin();it!=nums.end();it++){
-            if(*it==1){
-                count++;
-                if(Max<count)   Max=count;
+    int findPoisonedDuration(vector<int>& timeSeries, int duration) {
+        /*
+            less：不足一个单位（duration）的秒数
+            count： duration 个数
+            sec：总秒数
+        */
+        int less=0,count=0,sec=0;
+        int len=timeSeries.size();
+        if(len==1)    sec=duration;
+        else{
+            for(int i=0;i<len-1;i++){
+                if((timeSeries[i]+duration) <= timeSeries[i+1]){
+                    count++;
+                }
+                else{
+                    less+=timeSeries[i+1]-timeSeries[i];
+                }
             }
-            else{
-                count=0;
-            }
+            //最后1s，有一个完整的 duration ，即 count+1
+            sec=(count+1)*duration+less;
         }
-        return Max;
+        return sec;
     }
 };
 
 int main(){
+
     Solution v;
-    vector<int> nums;
-    nums.push_back(1);
-    nums.push_back(1);
-    nums.push_back(0);
-    nums.push_back(1);
-    nums.push_back(1);
-    nums.push_back(1);
-    int a=v.findMaxConsecutiveOnes(nums);
+    vector<int> timeSeries;
+    timeSeries.push_back(1);
+    // timeSeries.push_back(2);
+    int a=v.findPoisonedDuration(timeSeries,2);
     cout<<a<<endl;
 
+    system("pause");
     return 0;
 }
