@@ -38,13 +38,13 @@ public:
 
 int main(){
     Solution v;
-    vector<int> nums;
-    nums.push_back(1);
+    vector<int> nums{1,1,0,1,1,1};
+/*     nums.push_back(1);
     nums.push_back(1);
     nums.push_back(0);
     nums.push_back(1);
     nums.push_back(1);
-    nums.push_back(1);
+    nums.push_back(1); */
     int a=v.findMaxConsecutiveOnes(nums);
     cout<<a<<endl;
 
